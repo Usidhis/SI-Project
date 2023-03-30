@@ -12,11 +12,11 @@ e troca de segredos entre ambas as instâncias. Entre outras a pensar, o sistema
 fornecer as seguintes funcionalidades base:
 - geração de um segredo criptográﬁco a partir de palavras-passe inseridas pelo utili-
 zador, nomeadamente através de algoritmos como o Password Based Key Derivation
-Function 2 (PBKDF2); (Miguel)
+Function 2 (PBKDF2); **(Miguel)**
 - troca de um segredo criptográﬁco usando o protocolo de acordo de chaves Difﬁe-
-Hellman;(Dani)
-- troca de um segredo criptográﬁco usando Puzzles de Merkle; (Simão)
-- troca de um segredo criptográﬁco usando o Rivest, Shamir e Adleman (RSA);(Pedro)
+Hellman; **(Dani)**
+- troca de um segredo criptográﬁco usando Puzzles de Merkle; **(Simão)**
+- troca de um segredo criptográﬁco usando o Rivest, Shamir e Adleman (RSA); **(Pedro)**
 - distribuição de novas chaves de cifra a partir de chaves pré-distribuídas;
 - distribuição de novas chaves de cifra usando um agente de conﬁança (neste caso, a
 aplicação desenvolvida deve permitir que uma das instâncias possa ser conﬁgurada
@@ -25,7 +25,7 @@ como agente de conﬁança);
 lados. (calculo do hash)
 
 A aplicação desenvolvida pode funcionar em modo Client Line Interface (CLI) ou fornecer
-uma Graphical User Interface (GUI)(Fábio). Eventualmente, este sistema pode ser implementado
+uma Graphical User Interface (GUI)**(Fábio)**. Eventualmente, este sistema pode ser implementado
 para dispositivos móveis, nomeadamente para a plataforma Android. Conforme já suge-
 rido em cima, a aplicação deve poder funcionar em modo cliente ou servidor sendo que,
 idealmente, deve deixar que seja o utilizador a escolher o modo sempre que é iniciada.
