@@ -22,7 +22,7 @@ Hellman;
 aplicação desenvolvida deve permitir que uma das instâncias possa ser conﬁgurada
 como agente de conﬁança);
 - implementar forma de ter a certeza de que o segredo partilhado é o mesmo dos dois
-lados.
+lados. (calculo do hash)
 
 A aplicação desenvolvida pode funcionar em modo Client Line Interface (CLI) ou fornecer
 uma Graphical User Interface (GUI). Eventualmente, este sistema pode ser implementado
