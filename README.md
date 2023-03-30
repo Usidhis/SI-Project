@@ -1,5 +1,5 @@
 # SI-Project
-## Trabalho final da cadiera de Segurança Informática
+## Trabalho final da cadeira de Segurança Informática
 ### XIUUU: Troca de Segredos Criptográﬁcos Seguro
 
 O objetivo principal deste trabalho é implementar um sistema que permita trocar segredos
