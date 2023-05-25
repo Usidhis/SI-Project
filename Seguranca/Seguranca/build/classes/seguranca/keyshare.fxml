@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="356.0" prefWidth="522.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seguranca.keyshareController">
+   <children>
+      <Label fx:id="lab" alignment="CENTER" layoutX="164.0" layoutY="59.0" text="Escolhe o método">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font></Label>
+      <RadioButton fx:id="Hellman" layoutX="302.0" layoutY="107.0" mnemonicParsing="false" text=" Diffie-Hellman">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="metodo" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="RSA" layoutX="98.0" layoutY="107.0" mnemonicParsing="false" text="RSA" toggleGroup="$metodo">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="Puzzles" layoutX="97.0" layoutY="167.0" mnemonicParsing="false" text="Puzzles de Merkle rc4" toggleGroup="$metodo">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
+      <Button layoutX="200.0" layoutY="290.0" mnemonicParsing="false" onAction="#gobacky" text="Back" />
+      <Button layoutX="291.0" layoutY="290.0" mnemonicParsing="false" onAction="#gonexty" text="Next" />
+      <RadioButton fx:id="Puzzles1" layoutX="303.0" layoutY="167.0" mnemonicParsing="false" text="Puzzles de Merkle aes" toggleGroup="$metodo">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="PBKDF2" layoutX="98.0" layoutY="216.0" mnemonicParsing="false" text="PBKDF2 SHA1" toggleGroup="$metodo">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="PBKDF21" layoutX="302.0" layoutY="216.0" mnemonicParsing="false" text="PBKDF2 SHA256" toggleGroup="$metodo">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
+   </children>
+</AnchorPane>
