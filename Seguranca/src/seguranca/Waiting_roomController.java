@@ -47,7 +47,7 @@ public class Waiting_roomController implements Initializable {
             Scene methods = new Scene(nextscreen.load());
             stage.setScene(methods);
             finalkeyscreencontroller puerta = nextscreen.getController();
-            puerta.startup(s, ois, oos);
+            puerta.startupclient(s, ois, oos);
 
         } catch (Exception e) {
             e.printStackTrace();

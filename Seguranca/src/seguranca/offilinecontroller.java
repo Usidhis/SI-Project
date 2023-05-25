@@ -21,6 +21,11 @@ public class offilinecontroller implements Initializable {
 
     @FXML
     TextArea txt;
+    Socket soca;
+    ObjectInputStream ois;
+    ObjectOutputStream oos;
+    int metodo;
+    boolean server;
 
     @FXML
     public void gobacky(ActionEvent e) throws IOException{
@@ -30,11 +35,22 @@ public class offilinecontroller implements Initializable {
         menu.show();
         Stage stage = (Stage) txt.getScene().getWindow();
         stage.close();
+        ois.close();
+        oos.close();
+        soca.close();
     }
     
     @FXML
     public void gonexty(ActionEvent e) throws IOException{
+        FXMLLoader themenu = new FXMLLoader(getClass().getResource("finalkeyscreen.fxml"));
+        Stage stage = (Stage) txt.getScene().getWindow();
+        stage.setScene(new Scene(themenu.load()));
+        finalkeyscreencontroller canais = themenu.getController();
+        if (server) 
+            canais.startupserverpbk(soca, ois, oos, metodo, txt.getText());
         
+        else
+            canais.startupclientpbk(soca, ois, oos, metodo, txt.getText());
             
     }
     
@@ -46,6 +62,14 @@ public class offilinecontroller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+    }
+    public void startup(Socket soca, ObjectInputStream ois, ObjectOutputStream oos, int metodo, boolean server){
+        this.soca = soca;
+        this.ois = ois;
+        this.oos = oos;
+        this.metodo = metodo;
+        this.server = server;
         
     }
 

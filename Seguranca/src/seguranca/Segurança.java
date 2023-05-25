@@ -3,8 +3,6 @@ package seguranca;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Timer;
-import seguranca.PrimeGenerator;
-
 public class Segurança {
     public static void main(String[] args)
     {

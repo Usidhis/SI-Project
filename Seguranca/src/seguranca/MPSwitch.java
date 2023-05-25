@@ -21,8 +21,8 @@ public class MPSwitch {
 
     public static String key()  {  // Função de geração de chaves com padding de dez 1's e 6 digitos randomizados
         //String key = "111111111111";
-        String key = "111111111111";
-        for (int j = 0; j < 4; j++) {
+        String key = "1111111111";
+        for (int j = 0; j < 6; j++) {
             Random random = new Random();
             int digito = random.nextInt(10);
             key += digito;
@@ -169,7 +169,7 @@ public class MPSwitch {
     public static Bob solv_puzzel(ArrayList<Puzzel3> Puzzel){ // Função que soluciona um puzzle
         Random random = new Random();
         int escolha = random.nextInt(Puzzel.size());
-        String key_bf = "111111111111";
+        String key_bf = "1111111111";
         String criptograma = Puzzel.get(escolha).getCriptograma();
         int cifra = Puzzel.get(escolha).getCifra();
         for (int i = 0; i < 10; i++){
@@ -184,9 +184,11 @@ public class MPSwitch {
                     for (int l = 0; l < 10; l++) {
                         key_bf += l;
 
-                        
+                        for (int m = 0; m < 10; m++) {
+                            key_bf += m;
 
-                            
+                            for (int n = 0; n < 10; n++) {
+                                key_bf += n;
 
                                 //System.out.println("key BF: " + key_bf);
                                 try {
@@ -199,15 +201,17 @@ public class MPSwitch {
                                 } catch (Exception e) {
 
                                 }
-                                
+                                key_bf = "1111111111" + i +j + k + l + m;
+                            }
+                            key_bf = "1111111111" + i +j + k + l;
                         }
-                        key_bf = "111111111111" + i +j + k;
+                        key_bf = "1111111111" + i +j + k;
                     }
-                    key_bf = "111111111111" + i + j;
+                    key_bf = "1111111111" + i + j;
                 }
-                key_bf = "111111111111" + i;
+                key_bf = "1111111111" + i;
             }
-        
+        }
 
         return null;
     }

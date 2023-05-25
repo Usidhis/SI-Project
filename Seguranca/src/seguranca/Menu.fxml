@@ -19,7 +19,7 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <RadioButton fx:id="server" layoutX="224.0" layoutY="185.0" mnemonicParsing="false" onAction="#be_a_server" text="Server">
+      <RadioButton fx:id="server" layoutX="297.0" layoutY="178.0" mnemonicParsing="false" onAction="#be_a_server" text="Server">
          <font>
             <Font size="15.0" />
          </font>
@@ -27,12 +27,7 @@
             <ToggleGroup fx:id="mode" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="client" layoutX="77.0" layoutY="185.0" mnemonicParsing="false" onAction="#be_a_client" selected="true" text="Client" toggleGroup="$mode">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="offiline" layoutX="374.0" layoutY="185.0" mnemonicParsing="false" onAction="#be_offiline" text="Offline" toggleGroup="$mode">
+      <RadioButton fx:id="client" layoutX="150.0" layoutY="178.0" mnemonicParsing="false" onAction="#be_a_client" selected="true" text="Client" toggleGroup="$mode">
          <font>
             <Font size="15.0" />
          </font>

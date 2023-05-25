@@ -31,9 +31,19 @@
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <Button layoutX="199.0" layoutY="241.0" mnemonicParsing="false" onAction="#gobacky" text="Back" />
-      <Button layoutX="290.0" layoutY="241.0" mnemonicParsing="false" onAction="#gonexty" text="Next" />
+      <Button layoutX="200.0" layoutY="290.0" mnemonicParsing="false" onAction="#gobacky" text="Back" />
+      <Button layoutX="291.0" layoutY="290.0" mnemonicParsing="false" onAction="#gonexty" text="Next" />
       <RadioButton fx:id="Puzzles1" layoutX="303.0" layoutY="167.0" mnemonicParsing="false" text="Puzzles de Merkle aes" toggleGroup="$metodo">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="PBKDF2" layoutX="98.0" layoutY="216.0" mnemonicParsing="false" text="PBKDF2 SHA1" toggleGroup="$metodo">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="PBKDF21" layoutX="302.0" layoutY="216.0" mnemonicParsing="false" text="PBKDF2 SHA256" toggleGroup="$metodo">
          <font>
             <Font size="15.0" />
          </font>

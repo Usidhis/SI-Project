@@ -5,13 +5,41 @@ import java.security.SecureRandom;
 
 public class PrimeGenerator {
 
-    private static final int[] FIRST_PRIMES_LIST = {
-            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83,
-            89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179,
-            181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277,
-            281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349,
+    // lista dos primeiros números primos, usados como base no teste de Miller-Rabin
+    private static final BigInteger[] FIRST_PRIMES_LIST = {
+            BigInteger.valueOf(2), BigInteger.valueOf(3), BigInteger.valueOf(5), BigInteger.valueOf(7),
+            BigInteger.valueOf(11), BigInteger.valueOf(13), BigInteger.valueOf(17), BigInteger.valueOf(19),
+            BigInteger.valueOf(23), BigInteger.valueOf(29), BigInteger.valueOf(31), BigInteger.valueOf(37),
+            BigInteger.valueOf(41), BigInteger.valueOf(43), BigInteger.valueOf(47), BigInteger.valueOf(53),
+            BigInteger.valueOf(59), BigInteger.valueOf(61), BigInteger.valueOf(67), BigInteger.valueOf(71),
+            BigInteger.valueOf(73), BigInteger.valueOf(79), BigInteger.valueOf(83), BigInteger.valueOf(89),
+            BigInteger.valueOf(97), BigInteger.valueOf(101), BigInteger.valueOf(103), BigInteger.valueOf(107),
+            BigInteger.valueOf(109), BigInteger.valueOf(113), BigInteger.valueOf(127), BigInteger.valueOf(131),
+            BigInteger.valueOf(137), BigInteger.valueOf(139), BigInteger.valueOf(149), BigInteger.valueOf(151),
+            BigInteger.valueOf(157), BigInteger.valueOf(163), BigInteger.valueOf(167), BigInteger.valueOf(173),
+            BigInteger.valueOf(179), BigInteger.valueOf(181), BigInteger.valueOf(191), BigInteger.valueOf(193),
+            BigInteger.valueOf(197), BigInteger.valueOf(199), BigInteger.valueOf(211), BigInteger.valueOf(223),
+            BigInteger.valueOf(227), BigInteger.valueOf(229), BigInteger.valueOf(233), BigInteger.valueOf(239),
+            BigInteger.valueOf(241), BigInteger.valueOf(251), BigInteger.valueOf(257), BigInteger.valueOf(263),
+            BigInteger.valueOf(269), BigInteger.valueOf(271), BigInteger.valueOf(277), BigInteger.valueOf(281),
+            BigInteger.valueOf(283), BigInteger.valueOf(293), BigInteger.valueOf(307), BigInteger.valueOf(311),
+            BigInteger.valueOf(313), BigInteger.valueOf(317), BigInteger.valueOf(331), BigInteger.valueOf(337),
+            BigInteger.valueOf(347), BigInteger.valueOf(349),
     };
 
+
+    /*private static final BigInteger[] FIRST_PRIMES_LIST = new BigInteger[70];*/
+
+    /**
+     * Gera um número primo de baixo nível, usando o teste de primalidade simples de divisão por números primos pequenos.
+     * Esse número será utilizado como ponto de partida para o teste de primalidade de Miller-Rabin, que é um teste mais rigoroso
+     * para determinar se um número é primo. O objetivo é evitar testar diretamente a primalidade de um número grande com o teste de Miller-Rabin,
+     * o que seria muito lento. Em vez disso, o teste é realizado primeiro em um número menor e mais fácil de verificar,
+     * e apenas depois é aplicado ao número maior e mais complexo.
+     *
+     * @param n O número de bits que o número primo deve ter.
+     * @return Um número primo de baixo nível.
+     */
     private static BigInteger nBitRandom(int n) {
         SecureRandom rnd = new SecureRandom();
         BigInteger minVal = BigInteger.valueOf(2).pow(n - 1);
@@ -23,13 +51,16 @@ public class PrimeGenerator {
         return randomNum;
     }
 
+    // gera um número primo de baixo nível com n bits
     private static BigInteger getLowLevelPrime(int n) {
         while (true) {
             BigInteger pc = nBitRandom(n);
 
             for (int i = 0; i < FIRST_PRIMES_LIST.length; i++) {
-                BigInteger divisor = BigInteger.valueOf(FIRST_PRIMES_LIST[i]);
+                BigInteger divisor = FIRST_PRIMES_LIST[i];
 
+                // se o número for divisível pelo primo da lista e não for primo,
+                // retorna para gerar um novo número
                 if (pc.mod(divisor).equals(BigInteger.ZERO) && divisor.pow(2).compareTo(pc) <= 0) {
                     break;
                 } else {
@@ -39,6 +70,7 @@ public class PrimeGenerator {
         }
     }
 
+    // verifica se o número passa no teste de Miller-Rabin
     private static boolean trialComposite(BigInteger roundTester, BigInteger ec, BigInteger mrc, int maxDivisionsByTwo) {
         if (roundTester.modPow(ec, mrc).equals(BigInteger.ONE)) {
             return false;
@@ -51,31 +83,35 @@ public class PrimeGenerator {
         return true;
     }
 
+    /**
+     * Executa o teste de primalidade de Miller-Rabin no número inteiro positivo mrc.
+     * @param mrc O número a ser testado para primalidade.
+     * @return true se o número passou no teste de Miller-Rabin, caso contrário, retorna false.
+     */
     private static boolean isMillerRabinPassed(BigInteger mrc) {
-        SecureRandom rnd = new SecureRandom();
+        SecureRandom rng = new SecureRandom();
         int maxDivisionsByTwo = 0;
         BigInteger ec = mrc.subtract(BigInteger.ONE);
+
+        // Encontra o valor de "e" e "k", onde mrc-1 = 2^k * e
         while (ec.mod(BigInteger.valueOf(2)).equals(BigInteger.ZERO)) {
-            ec = ec.divide(BigInteger.valueOf(2));
+            ec = ec.shiftRight(1);
             maxDivisionsByTwo++;
         }
-
-
-        BigInteger roundTester = new BigInteger(mrc.bitLength(), rnd);
-        while (roundTester.compareTo(BigInteger.TWO) < 0 || roundTester.compareTo(mrc) >= 0) {
-            roundTester = new BigInteger(mrc.bitLength(), rnd);
-        }
-        for (int i = 0; i < 20; i++) {
+        // Executa o teste de Miller-Rabin com 40 rodadas
+        for (int i = 0; i < 40; i++) {
+            BigInteger roundTester = new BigInteger(mrc.bitLength(), rng);
             if (trialComposite(roundTester, ec, mrc, maxDivisionsByTwo)) {
                 return false;
             }
         }
+
         return true;
     }
 
-
     public static BigInteger get_newPrime(int bits ){
-        BigInteger prime_canditate = BigInteger.ZERO;
+        BigInteger prime_canditate;
+
         while (true){
             prime_canditate = getLowLevelPrime(bits);
             if (isMillerRabinPassed(prime_canditate) ){
@@ -85,5 +121,9 @@ public class PrimeGenerator {
         }
         return prime_canditate;
     }
+
+
+
+
 
 }

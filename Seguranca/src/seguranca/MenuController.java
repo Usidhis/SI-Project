@@ -34,9 +34,6 @@ public class MenuController implements Initializable {
     @FXML
     RadioButton client;
     @FXML
-    RadioButton offiline;
-
-    @FXML
     public void be_a_server(ActionEvent e) {
         ip.setDisable(true);
         porta.setDisable(false);
@@ -57,12 +54,6 @@ public class MenuController implements Initializable {
 
     @FXML
     public void next(ActionEvent e) throws IOException {
-        if(offiline.isSelected()){
-            Stage stage = (Stage) next.getScene().getWindow();
-            FXMLLoader nextscreen = new FXMLLoader(getClass().getResource("offiline.fxml"));    //abrir janela oofline
-            Scene aloni = new Scene(nextscreen.load());
-            stage.setScene(aloni);
-        }
         try {
             warning.setText("Select the operation method");
             if (!porta.getText().equals("") && (server.isSelected() || !ip.getText().equals(""))) {

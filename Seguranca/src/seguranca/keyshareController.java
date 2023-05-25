@@ -20,10 +20,11 @@ public class keyshareController implements Initializable {
     @FXML
     RadioButton PBKDF2;
     @FXML
+    RadioButton PBKDF21;    
+    @FXML
     RadioButton Puzzles;
     @FXML
     RadioButton Puzzles1;
-    
     @FXML
     RadioButton Hellman;
     @FXML
@@ -63,11 +64,23 @@ public class keyshareController implements Initializable {
         else if (RSA.isSelected()) {
             metodo = 4;
         }
+        else if (PBKDF2.isSelected())
+            metodo = 5;
+        else if (PBKDF21.isSelected())
+            metodo = 6;
+        
         else{
             lab.setText("escolhe uma");
             return;
         }
-        
+        if(metodo == 5 || metodo == 6){
+            FXMLLoader themenu = new FXMLLoader(getClass().getResource("offiline.fxml"));
+            Stage stage = (Stage) RSA.getScene().getWindow();
+            stage.setScene(new Scene(themenu.load()));
+            offilinecontroller canais = themenu.getController();
+            canais.startup(soca, ois, oos, metodo, true);
+            return;
+        }
         FXMLLoader themenu = new FXMLLoader(getClass().getResource("finalkeyscreen.fxml"));
         Stage menu = new Stage();
         menu.setScene(new Scene(themenu.load()));
@@ -75,7 +88,7 @@ public class keyshareController implements Initializable {
         Stage stage = (Stage) RSA.getScene().getWindow();
         stage.close();
         finalkeyscreencontroller canais = themenu.getController();
-        canais.startup(soca, ois, oos, metodo);
+        canais.startupserver(soca, ois, oos, metodo);
             
     }
     
