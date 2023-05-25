@@ -1,6 +1,7 @@
 package seguranca;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.net.Socket;
 
 import java.net.URL;
@@ -48,9 +49,33 @@ public class finalkeyscreencontroller implements Initializable {
                     oos.writeObject(b.getEscolha());
                     break;
                 case 3:
+                    BigInteger publickeyalice = (BigInteger) ois.readObject();
+                    BigInteger g = (BigInteger) ois.readObject();
+                    BigInteger p = (BigInteger) ois.readObject();
                     
-                    
-                    
+                    DiffieHellman bob = new DiffieHellman(g, p);
+                    try {
+                        oos.writeObject(bob.getPublicKey());
+                        String assinatura = (String) ois.readObject();
+                        bob.calculateSharedKey(publickeyalice, p);
+                        if(bob.verifyHashSharedKey(assinatura)){
+                            oos.writeObject(true);
+                            labeline.setText("as assinaturas verificam");
+                            filesaver.savedafilete(publickeyalice, "publickeyalice do bob.txt");
+                            filesaver.savedafilete(bob.getPublicKey(), "publickeybob do bob.txt");
+                            filesaver.savedafilete(bob.getprivateKey(), "privatekey do bob.txt");
+                            filesaver.savedafilete(bob.getSharedKey(), "sharedkey do bob.txt");
+                            
+                                                       
+                        }
+                        else{
+                            oos.writeObject(false);
+                            labeline.setText("as assinaturas nao correspondem");
+                        }
+                        
+                    } catch (Exception e) {
+                    }
+
                     break;
                 case 4:
                     String pubkeyserver = (String) ois.readObject();
@@ -153,7 +178,28 @@ public class finalkeyscreencontroller implements Initializable {
                 }
                 break;
             case 3:
-                
+                DiffieHellman alice = new DiffieHellman();
+                try {
+                    oos.writeObject(alice.getPublicKey());
+                    oos.writeObject(alice.g);
+                    oos.writeObject(alice.p);
+                    BigInteger publickeyclient = (BigInteger) ois.readObject();
+                    String sharedkeyserver = alice.calculateSharedKeyWithVerification(publickeyclient, alice.p);
+                    oos.writeObject(sharedkeyserver);
+                    
+                    if((boolean) ois.readObject()){
+                            labeline.setText("as assinaturas verificam");
+                            filesaver.savedafilete(publickeyclient, "publickeybob do alice.txt");
+                            filesaver.savedafilete(alice.getPublicKey(), "publickeyalice do alice.txt");
+                            filesaver.savedafilete(alice.getprivateKey(), "privatekey do alice.txt");
+                            filesaver.savedafilete(alice.getSharedKey(), "sharedkey do alice.txt");
+                            
+                                                       
+                        }
+                        else
+                            labeline.setText("as assinaturas nao correspondem");
+                } catch (Exception e) {
+                }
                 break;
             case 4:
                 RSA a = new RSA();
@@ -182,15 +228,7 @@ public class finalkeyscreencontroller implements Initializable {
                 throw new AssertionError();
         }
         try {
-            int answer = (int) ois.readObject();
-            MessageDigest dgst = MessageDigest.getInstance("SHA-256");
-            if (ois.readObject().equals(dgst.digest(String.valueOf(answer).getBytes()))) {
-                labeline.setText("password saved to file");
-
-            } else {
-                labeline.setText("the keys dont match");
-            }
-
+            
             soca.close();
             ois.close();
             oos.close();
