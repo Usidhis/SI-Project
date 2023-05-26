@@ -2,6 +2,7 @@ package seguranca;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import javafx.fxml.Initializable;
 import java.net.URL;
@@ -81,14 +82,18 @@ public class MenuController implements Initializable {
                 }
                 FXMLLoader nextscreen;
                 if (server.isSelected()) {
-                    Stage stage = (Stage) next.getScene().getWindow();
-                    nextscreen = new FXMLLoader(getClass().getResource("Client_list.fxml"));    //mudar para a janela de servidor
-                    Scene declients = new Scene(nextscreen.load());
-                    stage.setScene(declients);
-                    ClientListController puerta = nextscreen.getController();
-                    puerta.porta = Integer.parseInt(porta.getText());
-                    puerta.startup();
-                    
+                    try {
+                        ServerSocket sc = new ServerSocket(Integer.parseInt(porta.getText()));
+                        Stage stage = (Stage) next.getScene().getWindow();
+                        nextscreen = new FXMLLoader(getClass().getResource("Client_list.fxml"));    //mudar para a janela de servidor
+                        Scene declients = new Scene(nextscreen.load());
+                        stage.setScene(declients);
+                        ClientListController puerta = nextscreen.getController();
+                        puerta.porta = Integer.parseInt(porta.getText());
+                        puerta.startup(sc);
+                        } catch (Exception ex) {
+                            warning.setText("Erro ao criar server socket");
+                    }
                 } else {
                     Socket s = null;
                     try {
@@ -124,5 +129,14 @@ public class MenuController implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    }
+    @FXML
+    public void helppage(ActionEvent e) throws IOException{
+        FXMLLoader themenu = new FXMLLoader(getClass().getResource("helppage.fxml"));
+        Stage menu = new Stage();
+        menu.setScene(new Scene(themenu.load()));
+        menu.show();
+        Stage stage = (Stage) client.getScene().getWindow();
+        stage.close();
     }
 }

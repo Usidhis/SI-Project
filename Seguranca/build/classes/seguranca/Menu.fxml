@@ -36,6 +36,7 @@
       <Label layoutX="56.0" layoutY="249.0" text="IP:" />
       <TextField fx:id="porta" layoutX="311.0" layoutY="244.0" prefHeight="26.0" prefWidth="147.0" />
       <Label layoutX="270.0" layoutY="249.0" prefHeight="18.0" prefWidth="34.0" text="Porta:" />
-      <Button fx:id="next" layoutX="224.0" layoutY="300.0" mnemonicParsing="false" onAction="#next" text="Next" />
+      <Button fx:id="next" layoutX="364.0" layoutY="300.0" mnemonicParsing="false" onAction="#next" text="Next" />
+      <Button layoutX="131.0" layoutY="300.0" mnemonicParsing="false" onAction="#helppage" text="Help" />
    </children>
 </AnchorPane>

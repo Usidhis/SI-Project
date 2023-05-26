@@ -22,15 +22,16 @@ public class ClientListController implements Initializable {
     ListView lista;
     @FXML
     Label Label;
-    ServerSocket sc;
     ArrayList<String> clientes = new ArrayList();
     ArrayList<String> ipes = new ArrayList();
     ArrayList<Socket> socas = new ArrayList();
     ConnectionThread ct;
+    ServerSocket sc;
 
     public int porta;
 
-    public void startup() {
+    public void startup(ServerSocket sc) {
+        this.sc = sc;
         lista.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
             @Override
@@ -75,14 +76,10 @@ public class ClientListController implements Initializable {
             }
         });
         System.out.println("making da socket");
-        
-        try {
-            sc = new ServerSocket(porta);
-            ct = new ConnectionThread(sc, lista, this);
-            ct.start();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+                  
+        ct = new ConnectionThread(sc, lista, this);
+        ct.start();
+
         
         Scene activewindow = lista.getScene();
 
@@ -101,6 +98,13 @@ public class ClientListController implements Initializable {
     }
     @FXML
     public void gobacky(ActionEvent e) throws IOException{
+        sc.close();
+        try {
+            for (int i = 0; i < socas.size(); i++) {
+                socas.get(i).close();
+            }
+        } catch (Exception ex) {
+        }
         FXMLLoader themenu = new FXMLLoader(getClass().getResource("Menu.fxml"));
         Stage menu = new Stage();
         menu.setScene(new Scene(themenu.load()));

@@ -36,7 +36,7 @@ public class ConnectionThread extends Thread {
                 Platform.runLater(() -> clc.addclient(ip.toString(), s));
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("a tomada fichou");
         }
     }

@@ -54,6 +54,7 @@ public class finalkeyscreencontroller implements Initializable {
                     BigInteger p = (BigInteger) ois.readObject();
                     
                     DiffieHellman bob = new DiffieHellman(g, p);
+                    
                     try {
                         oos.writeObject(bob.getPublicKey());
                         String assinatura = (String) ois.readObject();
@@ -74,6 +75,8 @@ public class finalkeyscreencontroller implements Initializable {
                         }
                         
                     } catch (Exception e) {
+                        gobacky(new ActionEvent());
+                        System.out.println("excecao de baixo");
                     }
 
                     break;
@@ -115,7 +118,9 @@ public class finalkeyscreencontroller implements Initializable {
             ois.close();
             oos.close();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            try {   
+                System.out.println("excecao de cima");} catch (Exception e) {
+            }
         }
 
     }
@@ -233,7 +238,6 @@ public class finalkeyscreencontroller implements Initializable {
             ois.close();
             oos.close();
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
 
     }

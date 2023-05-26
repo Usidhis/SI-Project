@@ -27,7 +27,6 @@ public class ClientThread extends Thread{
             String resposta = (String) is.readObject();
             System.out.println("got answer" + resposta);
             if (resposta.equals("accepted")) {                      //se a a resposta do servidor for accepted passar para a janela final, senao é recusado
-                System.out.println("gonna change scene");
                 Platform.runLater(() -> wrc.change());
             }  
             else{
