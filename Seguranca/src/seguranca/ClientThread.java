@@ -1,56 +1,25 @@
 package seguranca;
 
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.*;
 import javafx.application.Platform;
-import javafx.scene.control.Label;
 
 
-/**
- * The type Client thread.
- */
 public class ClientThread extends Thread{
-    /**
-     * The S.
-     */
-    Socket s;
-    /**
-     * The Is.
-     */
     ObjectInputStream is;
-    /**
-     * The Os.
-     */
-    ObjectOutputStream os;
-    /**
-     * The Text.
-     */
-    Label text;
-    /**
-     * The Wrc.
-     */
     Waiting_roomController wrc;
-
     /**
-     * Instantiates a new Client thread.
-     *
-     * @param s    the s
-     * @param text the text
-     * @param wrc  the wrc
-     * @param is   the is
-     * @param os   the os
+     * Inicializa a thread que agurda resposta do servidor
+     * @param wrc
+     * controlador da sala de espera para poder alterar a cena conforme necessário
+     * @param is 
+     * input stream que aguarda resposta do servidor
      */
-    public ClientThread(Socket s, Label text, Waiting_roomController wrc, ObjectInputStream is, ObjectOutputStream os){
-        this.s = s;
-        this.text = text;
+    public ClientThread(Waiting_roomController wrc, ObjectInputStream is){
         this.is = is;
-        this.os = os;
         this.wrc = wrc;
     }
-
     /**
-     * Run.
+     * thread que aguarda resposta do servidor
      */
     @Override
     public void run(){
