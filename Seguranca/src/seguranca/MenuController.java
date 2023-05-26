@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,26 +20,46 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * The type Menu controller.
+ */
 public class MenuController implements Initializable {
 
+    /**
+     * The Warning.
+     */
     @FXML
     Label warning;
+    /**
+     * The Ip.
+     */
     @FXML
     TextField ip;
+    /**
+     * The Porta.
+     */
     @FXML
     TextField porta;
+    /**
+     * The Next.
+     */
     @FXML
     Button next;
+    /**
+     * The Server.
+     */
     @FXML
     RadioButton server;
+    /**
+     * The Client.
+     */
     @FXML
     RadioButton client;
-    
+
     /**
-     * Desativa caixas de texto com base no método de operação
-     * 
-     * @param e 
-     * click event
+     * Be a server.
+     *
+     * @param e the e
      */
     @FXML
     public void be_a_server(ActionEvent e) {
@@ -44,25 +67,35 @@ public class MenuController implements Initializable {
         porta.setDisable(false);
         System.out.println("im a server");
     }
+
     /**
-     * Desativa caixas de texto com base no tipo de operação
-     * 
-     * @param e 
-     * click event
+     * Be a client.
+     *
+     * @param e the e
      */
     @FXML
     public void be_a_client(ActionEvent e) {            //desativa os campos desnecessarios
         ip.setDisable(false);
         porta.setDisable(false);
         System.out.println("im a client");
+    }
+
+    /**
+     * Be offiline.
+     *
+     * @param e the e
+     */
+    public void be_offiline(ActionEvent e){
+        ip.setDisable(true);
+        porta.setDisable(true);
         
     }
 
     /**
-     * procede para a proxima cena com base no método de operação
-     * 
-     * @param e 
-     * click event
+     * Next.
+     *
+     * @param e the e
+     * @throws IOException the io exception
      */
     @FXML
     public void next(ActionEvent e) throws IOException {
@@ -141,11 +174,12 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
+
     /**
-     * altera a cena para a página de ajuda
-     * 
-     * @param e 
-     * click event
+     * Helppage.
+     *
+     * @param e the e
+     * @throws IOException the io exception
      */
     @FXML
     public void helppage(ActionEvent e) throws IOException{

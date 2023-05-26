@@ -4,7 +4,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+/**
+ * The type Reciever.
+ */
 public class Reciever {
+    /**
+     * Reciever string.
+     * Função que recebe o objeto do tipo Alice com o salt gerado pelo outro user e a escolha de SHA1 ou SHA256 e que vai recriar a chave ao receber de input dado pelo user a palavra passe
+     * @param salt_recebido the salt recebido
+     * @param passe         the passe
+     * @return the string
+     * @throws NoSuchAlgorithmException the no such algorithm exception
+     */
     public static String reciever(Alice salt_recebido, String passe) throws NoSuchAlgorithmException {
 
         //valores para a criação da chave intermediária

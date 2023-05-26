@@ -3,32 +3,45 @@ package seguranca;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Puzzel 3.
+ * Classe que cria objetos do tipo Puzzel3, este contem o segredo cifrado e o hash deste em texto limpo.
+ */
 public class Puzzel3 implements Serializable{
+    
     String criptograma;
+    
     int hash;
 
+    
     int cifra;
 
+    
     public String getCriptograma() {
         return criptograma;
     }
 
+    
     public int getHash() {
         return hash;
     }
 
+    
     public int getCifra() {
         return cifra;
     }
 
+   
     public void setCriptograma(String criptograma) {
         this.criptograma = criptograma;
     }
 
+    
     public void setHash(int hash) {
         this.hash = hash;
     }
 
+    
     public void setCifra(int cifra) {
         this.cifra = cifra;
     }
@@ -41,11 +54,14 @@ public class Puzzel3 implements Serializable{
         return hash == puzzel3.hash && cifra == puzzel3.cifra && Objects.equals(criptograma, puzzel3.criptograma);
     }
 
+    
     @Override
     public int hashCode() {
         return Objects.hash(criptograma, hash);
     }
 
+     cifra       the cifra
+     
     public Puzzel3(String criptograma, int hash, int cifra) {
         this.criptograma = criptograma;
         this.hash = hash;

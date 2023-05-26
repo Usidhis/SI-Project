@@ -7,7 +7,16 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 
+/**
+ * The type Filesaver.
+ */
 public class filesaver {
+    /**
+     * Savedafilete.
+     *
+     * @param obj  the obj
+     * @param nome the nome
+     */
     public static void savedafilete(Object obj, String nome){
         try {
 		ObjectOutputStream save = new ObjectOutputStream(
@@ -19,6 +28,13 @@ public class filesaver {
 		e.printStackTrace();
             }
     }
+
+    /**
+     * Gets .
+     *
+     * @param nome the nome
+     * @return the
+     */
     public static Object getdafilete(String nome) {
 		ObjectInputStream stream;
 		Object obj = new Object();

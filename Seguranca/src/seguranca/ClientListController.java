@@ -16,32 +16,56 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * The type Client list controller.
+ */
 public class ClientListController implements Initializable {
 
+    /**
+     * The Lista.
+     */
     @FXML
     ListView lista;
+    /**
+     * The Label.
+     */
     @FXML
     Label Label;
+    /**
+     * The Clientes.
+     */
     ArrayList<String> clientes = new ArrayList();
+    /**
+     * The Ipes.
+     */
     ArrayList<String> ipes = new ArrayList();
+    /**
+     * The Socas.
+     */
     ArrayList<Socket> socas = new ArrayList();
+    /**
+     * The Ct.
+     */
     ConnectionThread ct;
+    /**
+     * The Sc.
+     */
     ServerSocket sc;
 
+    /**
+     * The Porta.
+     */
     public int porta;
 
     /**
-     * Inicializar a janela com a lista dos possíveis clientes e criar a função on click
-     * @param sc 
-     * server socket da janela anterior
+     * Startup.
+     *
+     * @param sc the sc
      */
     public void startup(ServerSocket sc) {
         this.sc = sc;
         lista.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            /**
-             * funcao que coloca um listener em todos os items da list view
-             * este listener encerra todos os sockets dos clientes não selecionados e aceita o cliente escolhido
-             */
+
             @Override
             public void handle(MouseEvent event) {              //tratar de clicks nas opcoes
                 System.out.println("clicked on " + lista.getSelectionModel().getSelectedItem());
@@ -85,7 +109,7 @@ public class ClientListController implements Initializable {
         });
         System.out.println("making da socket");
                   
-        ct = new ConnectionThread(sc, this);
+        ct = new ConnectionThread(sc, lista, this);
         ct.start();
 
         
@@ -98,24 +122,24 @@ public class ClientListController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }
+
     /**
-     * adiciona o cliente que se ligou á list view
-     * @param ip
-     * ip do client
-     * @param soca 
-     * socket do cliente
+     * Addclient.
+     *
+     * @param ip   the ip
+     * @param soca the soca
      */
     public void addclient(String ip, Socket soca) {
         lista.getItems().add(ip);               //adicionar cliente a lista, chamado pela thread
         ipes.add(ip);
         socas.add(soca);
     }
+
     /**
-     * Regressar ao menu principal
-     * @param e
-     * evento do click
-     * @throws IOException 
-     * se não encontrar o fxml
+     * Gobacky.
+     *
+     * @param e the e
+     * @throws IOException the io exception
      */
     @FXML
     public void gobacky(ActionEvent e) throws IOException{

@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seguranca.helppagecontroller">
    <children>
-      <Label fx:id="labelita" alignment="TOP_LEFT" layoutX="14.0" layoutY="20.0" prefHeight="290.0" prefWidth="563.0" text="Eis as instrucoes de como realizar a bagaça.\nPrimeiro alguem tem de ser um server e depois essa pessoa escolhe uma porta.\nDepois um cliente escreve o ip e a porta escolhida. depois o fulano no servidor escolhe o cliente com base no ip do cliente. Por fim o servidor escolhe o metodo para transferencia de chaves e as chaves são trocadas, mas se o servidor escolher troca por pbkdf2 vai ser pedido a ambos os utilizadores para escreverem uma palavra passe, que deve corresponder" wrapText="true">
+      <Label fx:id="labelita" alignment="TOP_LEFT" layoutX="14.0" layoutY="20.0" prefHeight="290.0" prefWidth="563.0" text="Eis as instrucoes de como realizar a bagaça. Primeiro alguem tem de ser um server e depois essa pessoa escolhe uma porta. Depois um cliente escreve o ip e a porta escolhida. depois o fulano no servidor escolhe o cliente com base no ip do cliente. Por fim o servidor escolhe o metodo para transferencia de chaves e as chaves são trocadas, mas se o servidor escolher troca por pbkdf2 vai ser pedido a ambos os utilizadores para escreverem uma palavra passe, que deve corresponder" wrapText="true">
          <font>
             <Font size="22.0" />
          </font>

@@ -17,16 +17,22 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+/**
+ * The type Helppagecontroller.
+ */
 public class helppagecontroller implements Initializable {
 
+    /**
+     * The Labelita.
+     */
     @FXML
     Label labelita;
+
     /**
-     * Regressar ao menu principal
-     * @param e
-     * evento do click
-     * @throws IOException 
-     * se não encontrar o fxml
+     * Gobacky.
+     *
+     * @param e the e
+     * @throws IOException the io exception
      */
     @FXML
     public void gobacky(ActionEvent e) throws IOException{
@@ -44,13 +50,8 @@ public class helppagecontroller implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        labelita.setText("Método de operação da aplicação:\n"
-                + "1-O servidor escolhe uma porta e inicia a server socket\n"
-                + "2-O cliente insere o ip do servidor e a porta escolhida\n"
-                + "3-O servidor escolhe o cliente a que se quer ligar com base no ip\n"
-                + "4-O servidor escolhe o método que quer usar para trocar as chaves"
-                + "5-Se o método escolhido for PBKDF2 ambos os utilizadores devem escrever a palavra passe correspondente"
-                + "6-Os ficheiros criados são guardados");
+        // TODO
+        
     }
 
 }

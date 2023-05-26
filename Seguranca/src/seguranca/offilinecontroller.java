@@ -11,24 +11,48 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+/**
+ * The type Offilinecontroller.
+ */
 public class offilinecontroller implements Initializable {
 
+    /**
+     * The Txt.
+     */
     @FXML
     TextArea txt;
-    Socket soca;
-    ObjectInputStream ois;
-    ObjectOutputStream oos;
-    int metodo;
-    boolean server;
     /**
-     * Regressar ao menu principal
-     * @param e
-     * evento do click
-     * @throws IOException 
-     * se não encontrar o fxml
+     * The Soca.
+     */
+    Socket soca;
+    /**
+     * The Ois.
+     */
+    ObjectInputStream ois;
+    /**
+     * The Oos.
+     */
+    ObjectOutputStream oos;
+    /**
+     * The Metodo.
+     */
+    int metodo;
+    /**
+     * The Server.
+     */
+    boolean server;
+
+    /**
+     * Gobacky.
+     *
+     * @param e the e
+     * @throws IOException the io exception
      */
     @FXML
     public void gobacky(ActionEvent e) throws IOException{
@@ -42,7 +66,13 @@ public class offilinecontroller implements Initializable {
         oos.close();
         soca.close();
     }
-    
+
+    /**
+     * Gonexty.
+     *
+     * @param e the e
+     * @throws IOException the io exception
+     */
     @FXML
     public void gonexty(ActionEvent e) throws IOException{
         FXMLLoader themenu = new FXMLLoader(getClass().getResource("finalkeyscreen.fxml"));
@@ -67,6 +97,16 @@ public class offilinecontroller implements Initializable {
         // TODO
         
     }
+
+    /**
+     * Startup.
+     *
+     * @param soca   the soca
+     * @param ois    the ois
+     * @param oos    the oos
+     * @param metodo the metodo
+     * @param server the server
+     */
     public void startup(Socket soca, ObjectInputStream ois, ObjectOutputStream oos, int metodo, boolean server){
         this.soca = soca;
         this.ois = ois;
