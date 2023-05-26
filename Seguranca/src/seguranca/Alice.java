@@ -10,65 +10,33 @@ public class Alice implements Serializable{
 
     /**
      * Get salt byte [ ].
-     *
+     * Classe que cria objetos do tipo Alice, contém o valor do salt num array de bytes e um int que indica qual a função criptográfica de hash escolhida pelo sender
      * @return the byte [ ]
      */
     public byte[] getSalt() {
         return salt;
     }
-
-    /**
-     * Sets salt.
-     *
-     * @param salt the salt
-     */
+    
     public void setSalt(byte[] salt) {
         this.salt = salt;
     }
-
-    /**
-     * Gets escolha.
-     *
-     * @return the escolha
-     */
+    
     public int getEscolha() {
         return escolha;
     }
 
-    /**
-     * Sets escolha.
-     *
-     * @param escolha the escolha
-     */
     public void setEscolha(int escolha) {
         this.escolha = escolha;
     }
-
-    /**
-     * The Salt.
-     */
+    
     byte[] salt;
-    /**
-     * The Escolha.
-     */
     int escolha;
 
-    /**
-     * Instantiates a new Alice.
-     *
-     * @param salt    the salt
-     * @param escolha the escolha
-     */
     public Alice(byte[] salt, int escolha){
         this.salt = salt;
         this.escolha = escolha;
     }
 
-    /**
-     * To string string.
-     *
-     * @return the string
-     */
     @Override
     public String toString() {
         return "Alice{" +
