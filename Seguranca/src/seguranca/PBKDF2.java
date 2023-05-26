@@ -11,7 +11,7 @@ import java.security.spec.KeySpec;
 public class PBKDF2 {
     /**
      * Pbkdf 2 sha 1 byte [ ].
-     *
+     * Função que gera a middle key para a SHA1
      * @param password   the password
      * @param salt       the salt
      * @param iterations the iterations
@@ -33,7 +33,7 @@ public class PBKDF2 {
 
     /**
      * Final key sha 1 byte [ ].
-     *
+     * Função que gera a Final Key para a SHA1 
      * @param intermediateKey the intermediate key
      * @param salt            the salt
      * @return the byte [ ]
@@ -51,7 +51,7 @@ public class PBKDF2 {
 
     /**
      * Pbkdf 2 sha 256 byte [ ].
-     *
+     * Função que gera a middle key para a SHA256
      * @param password   the password
      * @param salt       the salt
      * @param iterations the iterations
@@ -73,7 +73,7 @@ public class PBKDF2 {
 
     /**
      * Final key sha 256 byte [ ].
-     *
+     * Função que gera a Final key para a SHA256
      * @param intermediateKey the intermediate key
      * @param salt            the salt
      * @return the byte [ ]
