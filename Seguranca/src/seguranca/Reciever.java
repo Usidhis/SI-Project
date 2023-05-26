@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Reciever {
     /**
      * Reciever string.
-     *
+     * Função que recebe o objeto do tipo Alice com o salt gerado pelo outro user e a escolha de SHA1 ou SHA256 e que vai recriar a chave ao receber de input dado pelo user a palavra passe
      * @param salt_recebido the salt recebido
      * @param passe         the passe
      * @return the string
