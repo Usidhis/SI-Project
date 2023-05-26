@@ -3,9 +3,14 @@ package seguranca;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+/**
+ * Geradores de números primos que utiliza teste de primalidade de Miller-Rabin
+ */
 public class PrimeGenerator {
 
-    // lista dos primeiros números primos, usados como base no teste de Miller-Rabin
+    /**
+     * Lista de primos utilizados no teste
+     */
     private static final BigInteger[] FIRST_PRIMES_LIST = {
             BigInteger.valueOf(2), BigInteger.valueOf(3), BigInteger.valueOf(5), BigInteger.valueOf(7),
             BigInteger.valueOf(11), BigInteger.valueOf(13), BigInteger.valueOf(17), BigInteger.valueOf(19),
@@ -28,8 +33,6 @@ public class PrimeGenerator {
     };
 
 
-    /*private static final BigInteger[] FIRST_PRIMES_LIST = new BigInteger[70];*/
-
     /**
      * Gera um número primo de baixo nível, usando o teste de primalidade simples de divisão por números primos pequenos.
      * Esse número será utilizado como ponto de partida para o teste de primalidade de Miller-Rabin, que é um teste mais rigoroso
@@ -51,7 +54,12 @@ public class PrimeGenerator {
         return randomNum;
     }
 
-    // gera um número primo de baixo nível com n bits
+    /**
+     * Cria um potencial número primo
+     * Faz um primeiro despiste para descobrir se o número gerado é um potencial primo
+     * @param n número de bits do primos
+     * @return potencial primo
+     */
     private static BigInteger getLowLevelPrime(int n) {
         while (true) {
             BigInteger pc = nBitRandom(n);
@@ -69,8 +77,15 @@ public class PrimeGenerator {
             }
         }
     }
-
-    // verifica se o número passa no teste de Miller-Rabin
+    /**
+     * Verifica se um número é composto utilizando o teste de Miller-Rabin.
+     *
+     * @param roundTester O número a ser testado.
+     * @param ec O valor de "e" utilizado no teste.
+     * @param mrc O valor de "m" utilizado no teste.
+     * @param maxDivisionsByTwo O número máximo de divisões por dois permitido.
+     * @return Retorna verdadeiro se o número for provavelmente composto, falso caso contrário.
+     */
     private static boolean trialComposite(BigInteger roundTester, BigInteger ec, BigInteger mrc, int maxDivisionsByTwo) {
         if (roundTester.modPow(ec, mrc).equals(BigInteger.ONE)) {
             return false;
@@ -109,6 +124,13 @@ public class PrimeGenerator {
         return true;
     }
 
+    /**
+     * 
+     * Gera um novo número primo
+     *
+     * @param bits número de bits 
+     * @return número primo
+     */
     public static BigInteger get_newPrime(int bits ){
         BigInteger prime_canditate;
 
@@ -121,9 +143,4 @@ public class PrimeGenerator {
         }
         return prime_canditate;
     }
-
-
-
-
-
 }
