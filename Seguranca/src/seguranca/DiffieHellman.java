@@ -17,7 +17,13 @@ public class DiffieHellman {
     private BigInteger privateKey;
     private BigInteger publicKey;
     private BigInteger sharedKey;
+    /**
+     * The G.
+     */
     public BigInteger g;
+    /**
+     * The P.
+     */
     public BigInteger p;
 
     /**
@@ -44,6 +50,9 @@ public class DiffieHellman {
      * Obtendo a chave privada, criada aleatoriamente;
      * Utiliza o g e o p para:
      * Calcular a chave publica.
+     *
+     * @param g the g
+     * @param p the p
      */
     public DiffieHellman(BigInteger g, BigInteger p) {
         this.g = g;
@@ -58,10 +67,7 @@ public class DiffieHellman {
      * Calcula a chave partilhada com verificação.
      *
      * @param sharedPublicKey - chave publica enviada,
-     * @param p ,
-     * Calcula a chave partilhada,
-     * Obtem a hash dessa chave,
-     * Assina a hash com rsa,
+     * @param p               , Calcula a chave partilhada, Obtem a hash dessa chave, Assina a hash com rsa,
      * @return duma String com a assinatura da hash da chave partilhada juntamente com uma chave publica rsa.
      */
     public String calculateSharedKeyWithVerification(BigInteger sharedPublicKey, BigInteger p) {
@@ -82,7 +88,7 @@ public class DiffieHellman {
      * Calcula a chave partilhada.
      *
      * @param otherPublicKey - chave publica enviada,
-     * @param p
+     * @param p              the p
      */
     public void calculateSharedKey(BigInteger otherPublicKey, BigInteger p) {
         sharedKey = otherPublicKey.modPow(privateKey, p);
@@ -91,10 +97,7 @@ public class DiffieHellman {
     /**
      * Verifica a hash da chave partilhada.
      *
-     * @param recive_signature - Assinatura da hash da chave partilhada com chave publica rsa recebida,
-     * Separa a assinatura e a chave publica,
-     * Calcula a hash da chave partilhada,
-     * Faz varificação por rsa,
+     * @param recive_signature - Assinatura da hash da chave partilhada com chave publica rsa recebida, Separa a assinatura e a chave publica, Calcula a hash da chave partilhada, Faz varificação por rsa,
      * @return de um booleano.
      */
     public boolean verifyHashSharedKey(String recive_signature){
@@ -141,6 +144,12 @@ public class DiffieHellman {
     public BigInteger getSharedKey() {
         return sharedKey;
     }
+
+    /**
+     * Getprivate key big integer.
+     *
+     * @return the big integer
+     */
     public BigInteger getprivateKey(){
         return privateKey;
     }

@@ -20,20 +20,47 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * The type Menu controller.
+ */
 public class MenuController implements Initializable {
 
+    /**
+     * The Warning.
+     */
     @FXML
     Label warning;
+    /**
+     * The Ip.
+     */
     @FXML
     TextField ip;
+    /**
+     * The Porta.
+     */
     @FXML
     TextField porta;
+    /**
+     * The Next.
+     */
     @FXML
     Button next;
+    /**
+     * The Server.
+     */
     @FXML
     RadioButton server;
+    /**
+     * The Client.
+     */
     @FXML
     RadioButton client;
+
+    /**
+     * Be a server.
+     *
+     * @param e the e
+     */
     @FXML
     public void be_a_server(ActionEvent e) {
         ip.setDisable(true);
@@ -41,18 +68,35 @@ public class MenuController implements Initializable {
         System.out.println("im a server");
     }
 
+    /**
+     * Be a client.
+     *
+     * @param e the e
+     */
     @FXML
     public void be_a_client(ActionEvent e) {            //desativa os campos desnecessarios
         ip.setDisable(false);
         porta.setDisable(false);
         System.out.println("im a client");
     }
+
+    /**
+     * Be offiline.
+     *
+     * @param e the e
+     */
     public void be_offiline(ActionEvent e){
         ip.setDisable(true);
         porta.setDisable(true);
         
     }
 
+    /**
+     * Next.
+     *
+     * @param e the e
+     * @throws IOException the io exception
+     */
     @FXML
     public void next(ActionEvent e) throws IOException {
         try {
@@ -130,6 +174,13 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
+
+    /**
+     * Helppage.
+     *
+     * @param e the e
+     * @throws IOException the io exception
+     */
     @FXML
     public void helppage(ActionEvent e) throws IOException{
         FXMLLoader themenu = new FXMLLoader(getClass().getResource("helppage.fxml"));

@@ -13,14 +13,32 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * The type Waiting room controller.
+ */
 public class Waiting_roomController implements Initializable {
 
+    /**
+     * The Text.
+     */
     @FXML
     public Label text;
+    /**
+     * The S.
+     */
     public Socket s;
+    /**
+     * The Ois.
+     */
     public ObjectInputStream ois;
+    /**
+     * The Oos.
+     */
     public ObjectOutputStream oos;
 
+    /**
+     * Startup.
+     */
     public void startup() {
         try {
             oos = new ObjectOutputStream(s.getOutputStream());
@@ -40,6 +58,9 @@ public class Waiting_roomController implements Initializable {
 
     }
 
+    /**
+     * Change.
+     */
     public void change() {
         try {
             Stage stage = (Stage) text.getScene().getWindow();
@@ -53,9 +74,22 @@ public class Waiting_roomController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Change.
+     *
+     * @param bad the bad
+     */
     public void change(String bad){
         text.setText(bad);
     }
+
+    /**
+     * Gobacky.
+     *
+     * @param e the e
+     * @throws IOException the io exception
+     */
     @FXML
     public void gobacky(ActionEvent e) throws IOException{
         try {

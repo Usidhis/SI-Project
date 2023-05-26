@@ -7,12 +7,40 @@ import javafx.application.Platform;
 import javafx.scene.control.Label;
 
 
+/**
+ * The type Client thread.
+ */
 public class ClientThread extends Thread{
+    /**
+     * The S.
+     */
     Socket s;
+    /**
+     * The Is.
+     */
     ObjectInputStream is;
+    /**
+     * The Os.
+     */
     ObjectOutputStream os;
+    /**
+     * The Text.
+     */
     Label text;
+    /**
+     * The Wrc.
+     */
     Waiting_roomController wrc;
+
+    /**
+     * Instantiates a new Client thread.
+     *
+     * @param s    the s
+     * @param text the text
+     * @param wrc  the wrc
+     * @param is   the is
+     * @param os   the os
+     */
     public ClientThread(Socket s, Label text, Waiting_roomController wrc, ObjectInputStream is, ObjectOutputStream os){
         this.s = s;
         this.text = text;
@@ -20,6 +48,10 @@ public class ClientThread extends Thread{
         this.os = os;
         this.wrc = wrc;
     }
+
+    /**
+     * Run.
+     */
     @Override
     public void run(){
         try {

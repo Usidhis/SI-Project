@@ -5,8 +5,19 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 
+/**
+ * The type Main 2.
+ */
 public class Main2 {
 
+    /**
+     * Sender alice.
+     *
+     * @param passe   the passe
+     * @param escolha the escolha
+     * @return the alice
+     * @throws NoSuchAlgorithmException the no such algorithm exception
+     */
     public static Alice sender(String passe, int escolha) throws NoSuchAlgorithmException {
 
         //valores para a criação da chave intermediária

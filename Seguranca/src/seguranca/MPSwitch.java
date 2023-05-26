@@ -17,8 +17,16 @@ import java.util.Scanner;
 import static javax.crypto.Cipher.DECRYPT_MODE;
 import static javax.crypto.Cipher.ENCRYPT_MODE;
 
+/**
+ * The type Mp switch.
+ */
 public class MPSwitch {
 
+    /**
+     * Key string.
+     *
+     * @return the string
+     */
     public static String key()  {  // Função de geração de chaves com padding de dez 1's e 6 digitos randomizados
         //String key = "111111111111";
         String key = "1111111111";
@@ -34,6 +42,15 @@ public class MPSwitch {
         return key;
     }
 
+    /**
+     * Encrypt aes string.
+     *
+     * @param mensagem the mensagem
+     * @param key      the key
+     * @param escolha  the escolha
+     * @return the string
+     * @throws Exception the exception
+     */
     public static String encryptAES (String mensagem, byte[] key, int escolha) throws Exception { // Função de encriptação de um segredo de acordo com o tipo de cifra
         byte[] segredo_cifrado = new byte[0];
         byte[] chave = key;
@@ -71,6 +88,15 @@ public class MPSwitch {
         return null;
     }
 
+    /**
+     * Decrypt aes string.
+     *
+     * @param criptograma the criptograma
+     * @param key         the key
+     * @param cifra       the cifra
+     * @return the string
+     * @throws Exception the exception
+     */
     public static String decryptAES (String criptograma, byte[] key, int cifra) throws Exception{ // Função de desencriptação de um criptograma de acordo com o tipo de cifra
         switch (cifra){
             case 1:
@@ -110,14 +136,34 @@ public class MPSwitch {
 
         return criptograma;
     }
+
+    /**
+     * Encode string.
+     *
+     * @param data the data
+     * @return the string
+     */
     public static String encode(byte[] data){
         return Base64.getEncoder().encodeToString(data);
     }
+
+    /**
+     * Decode byte [ ].
+     *
+     * @param data the data
+     * @return the byte [ ]
+     */
     public static byte[] decode(String data){
         return Base64.getDecoder().decode(data);
     }
 
 
+    /**
+     * Generate puzzels array list.
+     *
+     * @param escolha the escolha
+     * @return the array list
+     */
     public static ArrayList<Puzzel3> generate_puzzels(int escolha) { // Função que gera N puzzles
         ArrayList<Puzzel3> Puzzels = new ArrayList<Puzzel3>();
         ArrayList<Secret2> Secrets = new ArrayList<Secret2>();
@@ -166,6 +212,12 @@ public class MPSwitch {
     }
 
 
+    /**
+     * Solv puzzel bob.
+     *
+     * @param Puzzel the puzzel
+     * @return the bob
+     */
     public static Bob solv_puzzel(ArrayList<Puzzel3> Puzzel){ // Função que soluciona um puzzle
         Random random = new Random();
         int escolha = random.nextInt(Puzzel.size());
@@ -216,6 +268,11 @@ public class MPSwitch {
         return null;
     }
 
+    /**
+     * Menu int.
+     *
+     * @return the int
+     */
     public static int menu(){ //Funão de escolha de metodo de cifra
         Scanner scanner = new Scanner(System.in);
         System.out.println("Escolha o método de encriptação: ");

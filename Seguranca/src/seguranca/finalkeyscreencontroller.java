@@ -24,6 +24,9 @@ import javafx.stage.Stage;
  */
 public class finalkeyscreencontroller implements Initializable {
 
+    /**
+     * The Labeline.
+     */
     @FXML
     Label labeline;
 
@@ -33,6 +36,13 @@ public class finalkeyscreencontroller implements Initializable {
         // TODO
     }
 
+    /**
+     * Startupclient.
+     *
+     * @param soca the soca
+     * @param ois  the ois
+     * @param oos  the oos
+     */
     public void startupclient(Socket soca, ObjectInputStream ois, ObjectOutputStream oos) {
         try {
             int llave = (int) ois.readObject();
@@ -125,6 +135,15 @@ public class finalkeyscreencontroller implements Initializable {
 
     }
 
+    /**
+     * Startupclientpbk.
+     *
+     * @param soca the soca
+     * @param ois  the ois
+     * @param oos  the oos
+     * @param opc  the opc
+     * @param pass the pass
+     */
     public void startupclientpbk(Socket soca, ObjectInputStream ois, ObjectOutputStream oos, int opc, String pass) {
         try {
             //do the stuff
@@ -157,6 +176,14 @@ public class finalkeyscreencontroller implements Initializable {
 
     }
 
+    /**
+     * Startupserver.
+     *
+     * @param soca the soca
+     * @param ois  the ois
+     * @param oos  the oos
+     * @param opc  the opc
+     */
     public void startupserver(Socket soca, ObjectInputStream ois, ObjectOutputStream oos, int opc) {
         try {
             oos.writeObject(opc);
@@ -242,6 +269,15 @@ public class finalkeyscreencontroller implements Initializable {
 
     }
 
+    /**
+     * Startupserverpbk.
+     *
+     * @param soca the soca
+     * @param ois  the ois
+     * @param oos  the oos
+     * @param opc  the opc
+     * @param pass the pass
+     */
     public void startupserverpbk(Socket soca, ObjectInputStream ois, ObjectOutputStream oos, int opc, String pass) {
         try {
             Alice a = Main2.sender(pass, opc);
@@ -265,6 +301,12 @@ public class finalkeyscreencontroller implements Initializable {
 
     }
 
+    /**
+     * Gobacky.
+     *
+     * @param e the e
+     * @throws IOException the io exception
+     */
     @FXML
     public void gobacky(ActionEvent e) throws IOException {
         FXMLLoader themenu = new FXMLLoader(getClass().getResource("Menu.fxml"));
@@ -273,6 +315,11 @@ public class finalkeyscreencontroller implements Initializable {
 
     }
 
+    /**
+     * Gets .
+     *
+     * @return the
+     */
     public ArrayList<Secret2> getdafilete() {
         ObjectInputStream stream;
         ArrayList<Secret2> xius = new ArrayList<Secret2>();

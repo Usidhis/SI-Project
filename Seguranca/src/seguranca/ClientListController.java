@@ -16,20 +16,52 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * The type Client list controller.
+ */
 public class ClientListController implements Initializable {
 
+    /**
+     * The Lista.
+     */
     @FXML
     ListView lista;
+    /**
+     * The Label.
+     */
     @FXML
     Label Label;
+    /**
+     * The Clientes.
+     */
     ArrayList<String> clientes = new ArrayList();
+    /**
+     * The Ipes.
+     */
     ArrayList<String> ipes = new ArrayList();
+    /**
+     * The Socas.
+     */
     ArrayList<Socket> socas = new ArrayList();
+    /**
+     * The Ct.
+     */
     ConnectionThread ct;
+    /**
+     * The Sc.
+     */
     ServerSocket sc;
 
+    /**
+     * The Porta.
+     */
     public int porta;
 
+    /**
+     * Startup.
+     *
+     * @param sc the sc
+     */
     public void startup(ServerSocket sc) {
         this.sc = sc;
         lista.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -91,11 +123,24 @@ public class ClientListController implements Initializable {
 
     }
 
+    /**
+     * Addclient.
+     *
+     * @param ip   the ip
+     * @param soca the soca
+     */
     public void addclient(String ip, Socket soca) {
         lista.getItems().add(ip);               //adicionar cliente a lista, chamado pela thread
         ipes.add(ip);
         socas.add(soca);
     }
+
+    /**
+     * Gobacky.
+     *
+     * @param e the e
+     * @throws IOException the io exception
+     */
     @FXML
     public void gobacky(ActionEvent e) throws IOException{
         sc.close();

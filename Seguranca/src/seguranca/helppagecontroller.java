@@ -17,10 +17,23 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+/**
+ * The type Helppagecontroller.
+ */
 public class helppagecontroller implements Initializable {
 
+    /**
+     * The Labelita.
+     */
     @FXML
     Label labelita;
+
+    /**
+     * Gobacky.
+     *
+     * @param e the e
+     * @throws IOException the io exception
+     */
     @FXML
     public void gobacky(ActionEvent e) throws IOException{
         FXMLLoader themenu = new FXMLLoader(getClass().getResource("Menu.fxml"));

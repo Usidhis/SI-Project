@@ -4,7 +4,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+/**
+ * The type Reciever.
+ */
 public class Reciever {
+    /**
+     * Reciever string.
+     *
+     * @param salt_recebido the salt recebido
+     * @param passe         the passe
+     * @return the string
+     * @throws NoSuchAlgorithmException the no such algorithm exception
+     */
     public static String reciever(Alice salt_recebido, String passe) throws NoSuchAlgorithmException {
 
         //valores para a criação da chave intermediária

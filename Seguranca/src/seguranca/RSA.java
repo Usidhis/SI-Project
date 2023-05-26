@@ -7,6 +7,9 @@ import java.security.spec.*;
 import java.util.*;
 
 
+/**
+ * RSA
+ */
 public class RSA implements Serializable {
     private BigInteger P1;
     private BigInteger P2;
@@ -16,7 +19,11 @@ public class RSA implements Serializable {
     private BigInteger D;
 
 
-
+    /**
+     * Construtor para o RSA.
+     * Gera dois primos
+     * Cria as chaves privadas e públicas
+     */
     public RSA() {
         // Generate two large prime numbers
         P1 = PrimeGenerator.get_newPrime(1024);
@@ -27,6 +34,14 @@ public class RSA implements Serializable {
         D = E.modInverse(PHI);
 
     }
+
+    /**
+     * Cria um certificado para o RSA
+     *
+     * @param issuer  Quem imite o certificado
+     * @param subject Para quem é o certificado
+     * @return String certificicado assinado
+     */
     public String create_certificate(String issuer, String subject){
         Date validityStartDate = new Date();
         Date validityEndDate = new Date(validityStartDate.getTime() + 365 * 24 * 60 * 60 * 1000L);
@@ -56,6 +71,12 @@ public class RSA implements Serializable {
         return certBuilder.toString();
     }
 
+    /**
+     * Usado para assinar um hash de um certificado ou outro hash
+     *
+     * @param hash hash para ser assinado
+     * @return hash assinado
+     */
     public String signHash(byte[] hash)  {
         // Convert the hash to a BigInteger
         BigInteger hashAsBigInt = new BigInteger(1, hash);
@@ -70,7 +91,16 @@ public class RSA implements Serializable {
     }
 
 
+    /**
+     * Verifica se o certificado é valido
+     *
+     * @param certificate  Certificado a ser validado
+     * @param publicKeyPem Chave pública do certificado
+     * @return boolean true se verifica, false se não verifica
+     */
     public boolean verifyCertificate(String certificate, String publicKeyPem) {
+        System.out.println(certificate);
+
         String[] frompem = reversePemPublicKey(publicKeyPem).split("\n");
         BigInteger N = new  BigInteger(frompem[0]);
         BigInteger E = new  BigInteger(frompem[1]);
@@ -99,14 +129,30 @@ public class RSA implements Serializable {
         return verifyHash(hash_original_with_rsa,hashedData,E,N);
     }
 
+    /**
+     * Verifica se um hash, outro hash asssinado com RSA e chave pública são compativeis
+     *
+     * @param hash_original_with_rsa Hash assinado com RSA
+     * @param hashedData             Hash calculado
+     * @param PubE                   Expoente RSA
+     * @param PubN                   Modulo RSA
+     * @return boolean true se verifica, false se não verifica
+     */
     public boolean verifyHash(BigInteger hash_original_with_rsa, BigInteger hashedData, BigInteger PubE, BigInteger PubN)  {
 
         // Sign the hash using RSA
         BigInteger signature = hash_original_with_rsa.modPow(PubE, PubN);
 
 
-       return signature.equals(hashedData);
+        return signature.equals(hashedData);
     }
+
+    /**
+     * Converte um chave pública em formato PEM em um modulo e expoente público de RSA
+     *
+     * @param pemPublicKey Chave pública em formato PEM
+     * @return String com módulo e expoente público
+     */
     public String reversePemPublicKey(String pemPublicKey)  {
         String BEGIN_PUBLIC_KEY = "-----BEGIN RSA PUBLIC KEY-----\n";
         String END_PUBLIC_KEY = "\n-----END RSA PUBLIC KEY-----";
@@ -149,6 +195,11 @@ public class RSA implements Serializable {
         return modulus + "\n" + exponent;
     }
 
+    /**
+     * Cria uma chave pública em formato PEM
+     *
+     * @return Chave pública em formato PEM
+     */
     public String PemPublicKey()  {
         String BEGIN_PUBLIC_KEY = "-----BEGIN RSA PUBLIC KEY-----\n";
         String END_PUBLIC_KEY = "\n-----END RSA PUBLIC KEY-----";
@@ -171,6 +222,13 @@ public class RSA implements Serializable {
         return BEGIN_PUBLIC_KEY + encodedKey + END_PUBLIC_KEY;
     }
 
+    /**
+     * Chave privada em formato PEM
+     *
+     * @return Chave privada em formato PEM
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeySpecException
+     */
     public String PemPrivateKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
         String BEGIN_PRIVATE_KEY = "-----BEGIN RSA PRIVATE KEY-----\n";
         String END_PRIVATE_KEY = "\n-----END RSA PRIVATE KEY-----";
@@ -192,85 +250,4 @@ public class RSA implements Serializable {
 
         return BEGIN_PRIVATE_KEY + encodedKey + END_PRIVATE_KEY;
     }
-
-    /*
-     public String encrypt(String message) throws Exception{
-        // Convert message to byte array
-        if (message == ""){
-            return "";
-        }
-        byte[] messageBytes = message.getBytes();
-        //se o algoritmo de hash for mudado isto percisa de ser alterado
-        if (messageBytes.length >= E.bitLength()){
-            throw new Exception("Mensagem demasiado grande");
-        }
-        //addpadding(messageBytes);
-
-
-
-        // Encrypt each byte separately using RSA
-        BigInteger[] encryptedBytes = new BigInteger[messageBytes.length];
-        for (int i = 0; i < messageBytes.length; i++) {
-            BigInteger byteAsBigInt = BigInteger.valueOf(messageBytes[i]);
-            encryptedBytes[i] = byteAsBigInt.modPow(E, N);
-        }
-
-        // Join the encrypted bytes together into a single string
-        StringBuilder encryptedMessage = new StringBuilder();
-        for (int i = 0; i < encryptedBytes.length; i++) {
-            encryptedMessage.append(encryptedBytes[i].toString(16)).append(" ");
-        }
-
-        return encryptedMessage.toString();
-    }
-
-    private byte[] addpadding(byte[] message){
-
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("SHA-1");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-        byte[] lHash = md.digest(message);
-
-
-        int paddingLength = E.bitLength()  - message.length - 2 * 20 - 2;
-        byte[] paddingString = new byte[paddingLength];
-
-        // Fill the paddingString with 0x00
-        for (int i = 0; i < paddingLength; i++) {
-            paddingString[i] = 0x00;
-        }
-
-
-       /* // Convert the hash to a hexadecimal string
-        StringBuilder hexString = new StringBuilder();
-        for (byte b : lHash) {
-            hexString.append(String.format("%02x", b));
-        }
-
-    }
-
-    public String decrypt(String message) {
-        // Split the encrypted message into individual bytes
-        if (message == ""){
-            return "";
-        }
-        String[] encryptedBytesString = message.split(" ");
-        BigInteger[] encryptedBytes = new BigInteger[encryptedBytesString.length];
-        for (int i = 0; i < encryptedBytesString.length; i++) {
-            encryptedBytes[i] = new BigInteger(encryptedBytesString[i], 16);
-        }
-
-        // Decrypt each byte separately using RSA
-        byte[] decryptedBytes = new byte[encryptedBytes.length];
-        for (int i = 0; i < encryptedBytes.length; i++) {
-            BigInteger byteAsBigInt = encryptedBytes[i];
-            BigInteger decryptedByte = byteAsBigInt.modPow(D, N);
-            decryptedBytesj[i] = decryptedByte.byteValueExact();
-        }
-
-        return new String(decryptedBytes);
-    }*/
 }

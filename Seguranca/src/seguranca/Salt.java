@@ -1,7 +1,16 @@
 package seguranca;
 
 import java.security.SecureRandom;
+
+/**
+ * The type Salt.
+ */
 public class Salt {
+    /**
+     * Salt gen byte [ ].
+     *
+     * @return the byte [ ]
+     */
     public static byte[] saltGen(){
     int numBytes = 16;
     SecureRandom rndNum = new SecureRandom();
