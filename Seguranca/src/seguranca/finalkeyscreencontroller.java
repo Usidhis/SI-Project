@@ -24,9 +24,6 @@ import javafx.stage.Stage;
  */
 public class finalkeyscreencontroller implements Initializable {
 
-    /**
-     * The Labeline.
-     */
     @FXML
     Label labeline;
 
@@ -35,13 +32,14 @@ public class finalkeyscreencontroller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
     /**
-     * Startupclient.
-     *
-     * @param soca the soca
-     * @param ois  the ois
-     * @param oos  the oos
+     * inicializa o o ecrã final e agurda por resposta do servidor, se o método escolhido for PBDKF2 é aberta a janela de input de texto
+     * @param soca
+     * socket da comunicação
+     * @param ois
+     * input stream da comunicação
+     * @param oos 
+     * output stream da comunicação
      */
     public void startupclient(Socket soca, ObjectInputStream ois, ObjectOutputStream oos) {
         try {
@@ -134,19 +132,21 @@ public class finalkeyscreencontroller implements Initializable {
         }
 
     }
-
     /**
-     * Startupclientpbk.
-     *
-     * @param soca the soca
-     * @param ois  the ois
-     * @param oos  the oos
-     * @param opc  the opc
-     * @param pass the pass
+     * Re inicializa o ecrã final para o PBDKF2
+     * @param soca
+     * socket da comunicação
+     * @param ois
+     * input stream da comunicação
+     * @param oos
+     * output stream da comunicação
+     * @param opc
+     * opção escolhida para hash no PBDKF2
+     * @param pass 
+     * palavra passe escrita pelo utilizador
      */
     public void startupclientpbk(Socket soca, ObjectInputStream ois, ObjectOutputStream oos, int opc, String pass) {
         try {
-            //do the stuff
             switch (opc) {
                 case 5:
                 case 6:
@@ -175,14 +175,16 @@ public class finalkeyscreencontroller implements Initializable {
         }
 
     }
-
     /**
-     * Startupserver.
-     *
-     * @param soca the soca
-     * @param ois  the ois
-     * @param oos  the oos
-     * @param opc  the opc
+     * inicializa o ecrã final do servidor
+     * @param soca
+     * socket da comunicação
+     * @param ois
+     * input stream da comunicaçã
+     * @param oos
+     * output stream da comunicação
+     * @param opc 
+     * opção escolhida no ecrã anterior
      */
     public void startupserver(Socket soca, ObjectInputStream ois, ObjectOutputStream oos, int opc) {
         try {
@@ -268,15 +270,18 @@ public class finalkeyscreencontroller implements Initializable {
         }
 
     }
-
     /**
-     * Startupserverpbk.
-     *
-     * @param soca the soca
-     * @param ois  the ois
-     * @param oos  the oos
-     * @param opc  the opc
-     * @param pass the pass
+     * inicializa o ecrã final do servidor se escolheu PBDKF2
+     * @param soca
+     * socket da comunicação
+     * @param ois
+     * input stream da comunicaçã
+     * @param oos
+     * output stream da comunicação
+     * @param opc 
+     * opção escolhida no ecrã anterior
+     * @param pass
+     * password escrita pelo utilizador
      */
     public void startupserverpbk(Socket soca, ObjectInputStream ois, ObjectOutputStream oos, int opc, String pass) {
         try {
@@ -300,12 +305,12 @@ public class finalkeyscreencontroller implements Initializable {
         }
 
     }
-
     /**
-     * Gobacky.
-     *
-     * @param e the e
-     * @throws IOException the io exception
+     * Regressar ao menu principal
+     * @param e
+     * evento do click
+     * @throws IOException 
+     * se não encontrar o fxml
      */
     @FXML
     public void gobacky(ActionEvent e) throws IOException {
@@ -314,11 +319,10 @@ public class finalkeyscreencontroller implements Initializable {
         stage.setScene(new Scene(themenu.load()));
 
     }
-
     /**
-     * Gets .
-     *
-     * @return the
+     * função para adquirir os puzzels criados
+     * @return 
+     * puzzels
      */
     public ArrayList<Secret2> getdafilete() {
         ObjectInputStream stream;

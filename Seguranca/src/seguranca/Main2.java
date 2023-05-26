@@ -5,21 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 
-/**
- * The type Main 2.
- */
 public class Main2 {
 
-    /**
-     * Sender alice.
-     * Função que recebe o número de iterações, tamanho da chave, a função criptográfica de hash e a palavra passe dada pelo user, chama a função de salt, a que gera a middle key
-     * e a que gera a final key para criar a chave, no final mostra a chave ao user e retorna um obejto do tipo alice que contem o salt e um int que representa a chave criptográfica de hash a 
-     * enviar para o outro user
-     * @param passe   the passe
-     * @param escolha the escolha
-     * @return the alice
-     * @throws NoSuchAlgorithmException the no such algorithm exception
-     */
     public static Alice sender(String passe, int escolha) throws NoSuchAlgorithmException {
 
         //valores para a criação da chave intermediária

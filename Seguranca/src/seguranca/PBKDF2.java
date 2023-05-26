@@ -5,19 +5,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.spec.KeySpec;
 
-/**
- * The type Pbkdf 2.
- */
 public class PBKDF2 {
-    /**
-     * Pbkdf 2 sha 1 byte [ ].
-     * Função que gera a middle key para a SHA1
-     * @param password   the password
-     * @param salt       the salt
-     * @param iterations the iterations
-     * @param keyLength  the key length
-     * @return the byte [ ]
-     */
     public static byte[] pbkdf2SHA1(char[] password, byte[] salt, int iterations, int keyLength) {
         try {
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
@@ -31,13 +19,6 @@ public class PBKDF2 {
     }
 
 
-    /**
-     * Final key sha 1 byte [ ].
-     * Função que gera a Final Key para a SHA1 
-     * @param intermediateKey the intermediate key
-     * @param salt            the salt
-     * @return the byte [ ]
-     */
     public static byte[] finalKeySHA1 (char[] intermediateKey, byte[] salt) {
         try {
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
@@ -49,15 +30,6 @@ public class PBKDF2 {
         }
     }
 
-    /**
-     * Pbkdf 2 sha 256 byte [ ].
-     * Função que gera a middle key para a SHA256
-     * @param password   the password
-     * @param salt       the salt
-     * @param iterations the iterations
-     * @param keyLength  the key length
-     * @return the byte [ ]
-     */
     public static byte[] pbkdf2SHA256(char[] password, byte[] salt, int iterations, int keyLength) {
         try {
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
@@ -71,13 +43,6 @@ public class PBKDF2 {
     }
 
 
-    /**
-     * Final key sha 256 byte [ ].
-     * Função que gera a Final key para a SHA256
-     * @param intermediateKey the intermediate key
-     * @param salt            the salt
-     * @return the byte [ ]
-     */
     public static byte[] finalKeySHA256 (char[] intermediateKey, byte[] salt) {
         try {
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");

@@ -10,34 +10,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-/**
- * The type Waiting room controller.
- */
 public class Waiting_roomController implements Initializable {
 
-    /**
-     * The Text.
-     */
     @FXML
     public Label text;
-    /**
-     * The S.
-     */
     public Socket s;
-    /**
-     * The Ois.
-     */
     public ObjectInputStream ois;
-    /**
-     * The Oos.
-     */
     public ObjectOutputStream oos;
-
     /**
-     * Startup.
+     * inicializa a waiting room que começa a thread que aguarda que o servidor se responda
      */
     public void startup() {
         try {
@@ -45,7 +28,7 @@ public class Waiting_roomController implements Initializable {
             oos.flush();
             System.out.println("got oos");
             ois = new ObjectInputStream(s.getInputStream());
-            ClientThread ct = new ClientThread(s, text, this, ois, oos);            //criar thread de cliente que espera que seja aceite ou recusado
+            ClientThread ct = new ClientThread(this, ois);            //criar thread de cliente que espera que seja aceite ou recusado
             System.out.println("bout to start da thread");
             ct.start();
         } catch (Exception e) {
@@ -57,9 +40,8 @@ public class Waiting_roomController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }
-
     /**
-     * Change.
+     * se for aceite avança para o ecrã final e aguarda pela informação do servidor 
      */
     public void change() {
         try {
@@ -74,21 +56,20 @@ public class Waiting_roomController implements Initializable {
             e.printStackTrace();
         }
     }
-
     /**
-     * Change.
-     *
-     * @param bad the bad
+     * se não for aceite altera o texto do label para informar o cliente que não foi escolhido
+     * @param bad 
+     * texto para por no label
      */
     public void change(String bad){
         text.setText(bad);
     }
-
     /**
-     * Gobacky.
-     *
-     * @param e the e
-     * @throws IOException the io exception
+     * Regressar ao menu principal
+     * @param e
+     * evento do click
+     * @throws IOException 
+     * se não encontrar o fxml
      */
     @FXML
     public void gobacky(ActionEvent e) throws IOException{

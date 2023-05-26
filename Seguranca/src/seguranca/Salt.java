@@ -1,16 +1,7 @@
 package seguranca;
 
 import java.security.SecureRandom;
-
-/**
- * The type Salt.
- */
 public class Salt {
-    /**
-     * Salt gen byte [ ].
-     * Função que gera o salt com valores aleatórios posição a posiç
-     * @return the byte [ ]
-     */
     public static byte[] saltGen(){
     int numBytes = 16;
     SecureRandom rndNum = new SecureRandom();
@@ -24,3 +15,9 @@ public class Salt {
 
 
 }
+
+// Linha 8, cena do 256
+//Since we want to generate random bytes,
+// which are values between 0 and 255 (inclusive),
+// we need to pass 256 to nextInt() method so that it generates
+// random integers between 0 (inclusive) and 256 (exclusive)

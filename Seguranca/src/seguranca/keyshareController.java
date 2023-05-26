@@ -15,65 +15,32 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
-/**
- * The type Keyshare controller.
- */
 public class keyshareController implements Initializable {
-    /**
-     * The Pbkdf 2.
-     */
     @FXML
     RadioButton PBKDF2;
-    /**
-     * The Pbkdf 21.
-     */
     @FXML
-    RadioButton PBKDF21;
-    /**
-     * The Puzzles.
-     */
+    RadioButton PBKDF21;    
     @FXML
     RadioButton Puzzles;
-    /**
-     * The Puzzles 1.
-     */
     @FXML
     RadioButton Puzzles1;
-    /**
-     * The Hellman.
-     */
     @FXML
     RadioButton Hellman;
-    /**
-     * The Rsa.
-     */
     @FXML
     RadioButton RSA;
-    /**
-     * The Soca.
-     */
     Socket soca;
-    /**
-     * The Oos.
-     */
     ObjectOutputStream oos;
-    /**
-     * The Ois.
-     */
     ObjectInputStream ois;
-    /**
-     * The Lab.
-     */
     @FXML
     Label lab;
-
-    /**
-     * Gobacky.
-     *
-     * @param e the e
-     * @throws IOException the io exception
-     */
     @FXML
+    /**
+     * Regressar ao menu principal
+     * @param e
+     * evento do click
+     * @throws IOException 
+     * se não encontrar o fxml
+     */
     public void gobacky(ActionEvent e) throws IOException{
         try {
             ois.close();
@@ -88,12 +55,12 @@ public class keyshareController implements Initializable {
         Stage stage = (Stage) RSA.getScene().getWindow();
         stage.close();
     }
-
     /**
-     * Gonexty.
-     *
-     * @param e the e
-     * @throws IOException the io exception
+     * avançar para o ecrã seguinte com a opção escolhida pelo servidor
+     * @param e
+     * evento do click
+     * @throws IOException
+     * exceção se não encontrar o fxml
      */
     @FXML
     public void gonexty(ActionEvent e) throws IOException{          //selecao de um metodo de troca de chaves
@@ -148,14 +115,6 @@ public class keyshareController implements Initializable {
         // TODO
         
     }
-
-    /**
-     * Startup.
-     *
-     * @param soca the soca
-     * @param ois  the ois
-     * @param oos  the oos
-     */
     public void startup(Socket soca, ObjectInputStream ois, ObjectOutputStream oos){
         this.soca = soca;
         this.ois = ois;

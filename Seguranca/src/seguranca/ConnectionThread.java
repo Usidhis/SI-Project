@@ -1,56 +1,29 @@
 package seguranca;
 
-import java.io.IOException;
 import java.net.*;
-import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListView;
 
-/**
- * The type Connection thread.
- */
 public class ConnectionThread extends Thread {
 
-    /**
-     * The Sc.
-     */
     ServerSocket sc;
-    /**
-     * The S.
-     */
     Socket s;
-    /**
-     * The Porta.
-     */
-    int porta;
-    /**
-     * The Lista.
-     */
     @FXML
-    ListView lista;
-    /**
-     * The Clc.
-     */
     ClientListController clc;
-
     /**
-     * Instantiates a new Connection thread.
-     *
-     * @param sc    the sc
-     * @param lista the lista
-     * @param clc   the clc
+     * Inicializar a thread com os argumentos necessários
+     * @param sc
+     * server socket criada ao início     * 
+     * @param clc
+     * controlador da view anterior para adicionar os clientes que se ligam
      */
-    public ConnectionThread(ServerSocket sc, ListView lista, ClientListController clc) {
+    public ConnectionThread(ServerSocket sc, ClientListController clc) {
         super();
         this.sc = sc;
-        this.lista = lista;
         this.clc = clc;
     }
-
     /**
-     * Run.
+     * aceita clientes a ligarem se á server socket
      */
     @FXML
     @Override

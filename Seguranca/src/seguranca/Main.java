@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * The type Main.
  *
  * @author jpc
  */
@@ -25,8 +24,6 @@ public class Main extends Application {
     }
 
     /**
-     * The entry point of application.
-     *
      * @param args designed without arguments.
      */
     public static void main(String[] args) {

@@ -17,18 +17,10 @@ import java.util.Scanner;
 import static javax.crypto.Cipher.DECRYPT_MODE;
 import static javax.crypto.Cipher.ENCRYPT_MODE;
 
-/**
- * The type Mp switch.
- * Classe que contem todas as funções para gerar e resolver os Puzzles de Merkel.
- */
 public class MPSwitch {
 
-    /**
-     * Key string.
-     * Função de geração de chaves com padding de dez 1's e 6 digitos randomizados.
-     * @return String da chave gerada.
-     */
     public static String key()  {  // Função de geração de chaves com padding de dez 1's e 6 digitos randomizados
+        //String key = "111111111111";
         String key = "1111111111";
         for (int j = 0; j < 6; j++) {
             Random random = new Random();
@@ -36,21 +28,13 @@ public class MPSwitch {
             key += digito;
         }
 
+        //String key = "1111111111111112";
         System.out.println(key);
 
         return key;
     }
 
-    /**
-     * Encrypt aes string. Função que encripta uma string.
-     *
-     * @param mensagem Segredo a ser cifrado.
-     * @param key      Chave para cifrar o segredo.
-     * @param escolha  Inteiro que indica a função de cifra a ser usada.
-     * @return Criptograma gerado.
-     * @throws Exception the exception
-     */
-    public static String encryptAES (String mensagem, byte[] key, int escolha) throws Exception {
+    public static String encryptAES (String mensagem, byte[] key, int escolha) throws Exception { // Função de encriptação de um segredo de acordo com o tipo de cifra
         byte[] segredo_cifrado = new byte[0];
         byte[] chave = key;
 
@@ -87,16 +71,7 @@ public class MPSwitch {
         return null;
     }
 
-    /**
-     * Decrypt aes string. Função de desencriptação de um criptograma de acordo com o tipo de cifra
-     *
-     * @param criptograma Criptograma que se pertende desencriptar.
-     * @param key         Chave de desencriptação
-     * @param cifra       Tipo de cifra que vai ser usado
-     * @return Criptograma decifrado.
-     * @throws Exception the exception
-     */
-    public static String decryptAES (String criptograma, byte[] key, int cifra) throws Exception{ 
+    public static String decryptAES (String criptograma, byte[] key, int cifra) throws Exception{ // Função de desencriptação de um criptograma de acordo com o tipo de cifra
         switch (cifra){
             case 1:
                 byte[] criptograma_in_bytes = decode(criptograma);
@@ -135,35 +110,15 @@ public class MPSwitch {
 
         return criptograma;
     }
-
-    /**
-     * Encode string. Função que faz o encode de bytes em Base64.
-     *
-     * @param data Bytes que irão ser encoded.
-     * @return String encoded.
-     */
     public static String encode(byte[] data){
         return Base64.getEncoder().encodeToString(data);
     }
-
-    /**
-     * Decode byte [ ]. Função que faz o decode de uma String em Base64
-     *
-     * @param data String que irá ser decoded.
-     * @return Bytes decoded.
-     */
     public static byte[] decode(String data){
         return Base64.getDecoder().decode(data);
     }
 
 
-    /**
-     * Generate puzzels array list.  Função que gera N Puzzles de Merkel.
-     *
-     * @param escolha Inteiro que indica a função de cifra a ser usada.
-     * @return Uma lista com todos os Puzzels com os seus hash. 
-     */
-    public static ArrayList<Puzzel3> generate_puzzels(int escolha) { 
+    public static ArrayList<Puzzel3> generate_puzzels(int escolha) { // Função que gera N puzzles
         ArrayList<Puzzel3> Puzzels = new ArrayList<Puzzel3>();
         ArrayList<Secret2> Secrets = new ArrayList<Secret2>();
         ArrayList<String> Keys = new ArrayList<String>();
@@ -211,13 +166,7 @@ public class MPSwitch {
     }
 
 
-    /**
-     * Solv puzzel bob. Função que soluciona um puzzle qualquer.
-     *
-     * @param Puzzel Puzzel escolhido para ser decifrado 
-     * @return Objeto do tipo Bob que contem o segredo limpo juntamente com o puzzel escolhido.
-     */
-    public static Bob solv_puzzel(ArrayList<Puzzel3> Puzzel){ 
+    public static Bob solv_puzzel(ArrayList<Puzzel3> Puzzel){ // Função que soluciona um puzzle
         Random random = new Random();
         int escolha = random.nextInt(Puzzel.size());
         String key_bf = "1111111111";
@@ -267,7 +216,6 @@ public class MPSwitch {
         return null;
     }
 
-    
     public static int menu(){ //Funão de escolha de metodo de cifra
         Scanner scanner = new Scanner(System.in);
         System.out.println("Escolha o método de encriptação: ");
